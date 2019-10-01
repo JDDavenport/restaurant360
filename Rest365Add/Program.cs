@@ -20,15 +20,8 @@ namespace Rest365Add
             //dList.Add('/n'.ToCharArray)
             //dList.ToArray();
             string[] values = numbers.Split(dList.ToArray());
-            if (values.Length < 3)
-            {
-                runAdd(values);
-            }
-            else
-            {
-                Console.WriteLine("This iteration limits the max numbers to two sorry");
-
-            }
+            runAdd(values);
+           
             //bool isFinished = true;
             //bool isFirst = true;
             //foreach(string st in values)
