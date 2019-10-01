@@ -13,6 +13,7 @@ namespace Rest365Add
              List<String> dList = new List<String>();
             dList.Add(",");
             dList.Add("/n");
+            string formula = " ";
 
             // The code provided will print ‘Hello World’ to the console.
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
@@ -98,6 +99,11 @@ namespace Rest365Add
                         { }
                         else
                         {
+                            if (formula.Length <2)
+                            {
+                                formula = st;
+                            }
+                            formula += "+" + st;
                             total += double.Parse(st);
 
                         }
@@ -117,6 +123,8 @@ namespace Rest365Add
 
             }
             Console.WriteLine("Your total is: "+ totalAdded);
+            Console.WriteLine("Your formula was: "+ formula);
+            Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
         }
