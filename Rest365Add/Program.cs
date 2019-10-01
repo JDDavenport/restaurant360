@@ -13,14 +13,19 @@ namespace Rest365Add
             
             // The code provided will print ‘Hello World’ to the console.
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello Welcome to a simple adding console app, please enter your numbers you would like to add");
-            String numbers = Console.ReadLine().ToString();
-            List<String> dList = new List<String>();
-            dList.Add(",");
-            dList.Add("/n");
-            //dList.ToArray();
-            String[] values = numbers.Split(dList.ToArray(), StringSplitOptions.None);
-            double totalAdded=runAdd(values);
+            String[] getValuesToAdd()
+            {
+                Console.WriteLine("Hello Welcome to a simple adding console app, please enter your numbers you would like to add");
+                String numbers = Console.ReadLine().ToString();
+                List<String> dList = new List<String>();
+                dList.Add(",");
+                dList.Add("/n");
+                //dList.ToArray();
+                String[] values = numbers.Split(dList.ToArray(), StringSplitOptions.None);
+                return values;
+            }
+            String[] numbersToAdd = getValuesToAdd();
+            double totalAdded=runAdd(numbersToAdd);
       
            
             //bool isFinished = true;
@@ -41,11 +46,11 @@ namespace Rest365Add
                 double total = 0;
                 foreach (string st in input)
                 {
-                    if (double.Parse(st) < 0)
+                    if (double.Parse(st) < 0)      //blocks negative numbers
                     {
                         
                         Console.WriteLine("Sorry you entered a negative number please enter only positive numbers please");
-
+                        return -1;
                     }
                     else
                     {
@@ -63,6 +68,13 @@ namespace Rest365Add
 
                 }
                 return total;
+            }
+            while(totalAdded==-1)
+            {
+                numbersToAdd = getValuesToAdd();
+                totalAdded = runAdd(numbersToAdd);
+
+
             }
             Console.WriteLine("Your total is: "+ totalAdded);
 
