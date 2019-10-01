@@ -10,35 +10,63 @@ namespace Rest365Add
     {
         static void Main(string[] args)
         {
-            
+             List<String> dList = new List<String>();
+            dList.Add(",");
+            dList.Add("/n");
+
             // The code provided will print ‘Hello World’ to the console.
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
             String[] getValuesToAdd()
             {
                 Console.WriteLine("Hello Welcome to a simple adding console app, please enter your numbers you would like to add");
                 String numbers = Console.ReadLine().ToString();
-                List<String> dList = new List<String>();
-                dList.Add(",");
-                dList.Add("/n");
                 String[] numbersSeperated = numbers.Split(dList.ToArray(), StringSplitOptions.None);
+
 
                 if (numbers.Substring(0, 1) == "//")
                 {
-                    numbers.Remove(0, 1);
-                    numbersSeperated = numbers.Split(dList.ToArray(), StringSplitOptions.None);
-                    String[] delimiter = numbers.Split(dList.ToArray(), StringSplitOptions.None);
-                    dList.Add(delimiter[0]);
-                    numbersSeperated = numbers.Split(dList.ToArray(), StringSplitOptions.None);
 
-                    numbersSeperated = numbersSeperated.Skip(1).ToArray();
+                    numbersSeperated = getCustomDelimiters(numbers);
 
                 }
-                //dList.ToArray();
+
                 return numbersSeperated;
             }
             String[] numbersToAdd = getValuesToAdd();
             double totalAdded=runAdd(numbersToAdd);
-      
+
+            String[] getCustomDelimiters(String delimiters2Parse)
+            {
+                String[] numbersSeperated = delimiters2Parse.Split(dList.ToArray(), StringSplitOptions.None);
+
+                delimiters2Parse.Remove(0, 1);
+                numbersSeperated = delimiters2Parse.Split(dList.ToArray(), StringSplitOptions.None);
+                if(numbersSeperated[0].Substring(0,0)=="[")
+                {
+                    numbersSeperated[0].Remove(numbersSeperated[0].Length, numbersSeperated[0].Length);
+                    numbersSeperated[0].Remove(0, 0);
+                    String[] st = { "][" };
+                    String[] customDelimiters = numbersSeperated[0].Split(st, StringSplitOptions.None);
+                    foreach (String s in customDelimiters )
+                    {
+                        dList.Add(s);
+                    }
+                    numbersSeperated = numbersSeperated.Skip(1).ToArray();
+
+                }
+                else
+                {
+                    numbersSeperated[0].Remove(numbersSeperated[0].Length, numbersSeperated[0].Length);
+                    numbersSeperated[0].Remove(0, 0);
+                    numbersSeperated = numbersSeperated.Skip(1).ToArray();
+
+                    dList.Add(numbersSeperated[0]);
+                }
+
+                numbersSeperated = delimiters2Parse.Split(dList.ToArray(), StringSplitOptions.None);
+
+                return numbersSeperated;
+            }
            
             //bool isFinished = true;
             //bool isFirst = true;
