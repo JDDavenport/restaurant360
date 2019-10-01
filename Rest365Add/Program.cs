@@ -20,9 +20,21 @@ namespace Rest365Add
                 List<String> dList = new List<String>();
                 dList.Add(",");
                 dList.Add("/n");
+                String[] numbersSeperated = numbers.Split(dList.ToArray(), StringSplitOptions.None);
+
+                if (numbers.Substring(0, 1) == "//")
+                {
+                    numbers.Remove(0, 1);
+                    numbersSeperated = numbers.Split(dList.ToArray(), StringSplitOptions.None);
+                    String[] delimiter = numbers.Split(dList.ToArray(), StringSplitOptions.None);
+                    dList.Add(delimiter[0]);
+                    numbersSeperated = numbers.Split(dList.ToArray(), StringSplitOptions.None);
+
+                    numbersSeperated = numbersSeperated.Skip(1).ToArray();
+
+                }
                 //dList.ToArray();
-                String[] values = numbers.Split(dList.ToArray(), StringSplitOptions.None);
-                return values;
+                return numbersSeperated;
             }
             String[] numbersToAdd = getValuesToAdd();
             double totalAdded=runAdd(numbersToAdd);
