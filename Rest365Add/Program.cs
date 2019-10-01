@@ -54,7 +54,7 @@ namespace Rest365Add
                     }
                     else
                     {
-                        if (double.Parse(st) > 1000)
+                        if (double.Parse(st) > 1000)  //blocks numbers greater than 1000
                         { }
                         else
                         {
